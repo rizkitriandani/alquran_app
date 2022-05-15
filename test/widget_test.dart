@@ -1,30 +1,44 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+import 'dart:convert';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_test/flutter_test.dart';
+import 'package:alquran/app/data/models/detail_surah.dart';
+import 'package:alquran/app/data/models/surah.dart';
+import 'package:http/http.dart' as http;
+import 'package:logger/logger.dart';
 
-import 'package:alquran/main.dart';
+var logger = Logger();
 
-void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+void main() async {
+  Uri url = Uri.parse("https://api.quran.sutanlab.id/surah");
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+  var result = await http.get(url);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+  List data = (json.decode(result.body) as Map<String, dynamic>)["data"];
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
-  });
+  logger.d("result.body => ${result.body}");
+  logger.d("data => $data");
+
+  // logger.d(result.body);
+
+  //data dari api -> model (yang sudah disiapkan)
+  Surah surahAnnaas = Surah.fromJson(data[113]);
+  logger.d(surahAnnaas.toJson());
+
+  //COBA MASUK KE NESTED MODEL
+  logger.d(surahAnnaas.name.long);
+
+  Uri urlAnnas =
+      Uri.parse("https://api.quran.sutanlab.id/surah/${surahAnnaas.number}");
+
+  var resultAnnas = await http.get(urlAnnas);
+
+  logger.d("result annas => ${resultAnnas.body}");
+
+  var dataAnnaas =
+      (json.decode(resultAnnas.body) as Map<String, dynamic>)["data"];
+
+  logger.d("data annas => $dataAnnaas");
+
+  DetailSurah detailAnnaas = DetailSurah.fromJson(dataAnnaas);
+  logger.d("object annas => ${detailAnnaas.toJson()}");
+  logger.d("ayat annas => ${detailAnnaas.verses[0].text.arab}");
 }
