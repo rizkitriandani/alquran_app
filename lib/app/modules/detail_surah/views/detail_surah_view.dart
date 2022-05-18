@@ -56,22 +56,27 @@ class DetailSurahView extends GetView<DetailSurahController> {
                   return const Center(child: Text("Tidak ada data"));
                 }
 
-                logger.v("Snapshot => $snapshot");
+                logger.d("Snapshot => $snapshot");
 
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: snapshot.data?.verses.length ?? 0,
                   itemBuilder: (context, index) {
+                    // if (snapshot.data?.verses.isEmpty) {
+                    //   return const SizedBox();
+                    // }
+                    detail.Verse? ayat = snapshot.data?.verses[index];
+
                     return Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Card(
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
                                 vertical: 5, horizontal: 10),
                             child: Row(
-                              mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 CircleAvatar(
                                   child: Text("${index + 1}"),
@@ -91,10 +96,27 @@ class DetailSurahView extends GetView<DetailSurahController> {
                             ),
                           ),
                         ),
-                        Container(
-                          width: double.infinity,
-                          child: Text(snapshot.data!.verses[index].text.arab, style: TextStyle(fontSize: 20),textAlign: TextAlign.start,)),
-                        const SizedBox(height: 30),
+                        SizedBox(
+                            width: double.infinity,
+                            child: Text(
+                              ayat!.text.arab,
+                              style: const TextStyle(fontSize: 30),
+                              textAlign: TextAlign.end,
+                            )),
+                        const SizedBox(height: 10),
+                        Text(
+                          ayat.text.transliteration.en,
+                          style: const TextStyle(
+                              fontSize: 18, fontStyle: FontStyle.italic),
+                          textAlign: TextAlign.end,
+                        ),
+                        const SizedBox(height: 25),
+                        Text(
+                          ayat.translation.id,
+                          style: const TextStyle(fontSize: 18),
+                          textAlign: TextAlign.justify,
+                        ),
+                        const SizedBox(height: 20),
                       ],
                     );
                   },
