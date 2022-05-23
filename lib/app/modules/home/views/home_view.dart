@@ -12,7 +12,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HomeView'),
+        title: const Text('Quran Digital'),
         centerTitle: true,
       ),
       body: FutureBuilder<List<Surah>>(
@@ -34,15 +34,15 @@ class HomeView extends GetView<HomeController> {
                   Surah surah = snapshot.data![index];
                   return ListTile(
                     onTap: () {
-                      Get.toNamed(Routes.DETAIL_SURAH,arguments: surah);
+                      Get.toNamed(Routes.DETAIL_SURAH, arguments: surah);
                     },
                     leading: CircleAvatar(
                       child: Text("${surah.number}"),
                     ),
-                    title: Text(surah.name.transliteration.id),
+                    title: Text(surah.name!.transliteration!.id!),
                     subtitle: Text(
-                        "${surah.numberOfVerses} Ayat | ${surah.revelation.id}"),
-                    trailing: Text(surah.name.short),
+                        "${surah.numberOfVerses!} Ayat | ${surah.revelation!.id!}"),
+                    trailing: Text(surah.name!.short!),
                   );
                 });
           }),

@@ -13,7 +13,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
     final Surah surah = Get.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text(surah.name.transliteration.id.toUpperCase()),
+        title: Text(surah.name!.transliteration!.id!.toUpperCase()),
         centerTitle: true,
       ),
       body: ListView(
@@ -24,17 +24,17 @@ class DetailSurahView extends GetView<DetailSurahController> {
               padding: const EdgeInsets.all(20.0),
               child: Column(children: [
                 Text(
-                  surah.name.transliteration.id.toUpperCase(),
+                  surah.name!.transliteration!.id!.toUpperCase(),
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "[ ${surah.name.translation.id} ]",
+                  "[ ${surah.name!.translation!.id} ]",
                   style: const TextStyle(
                       fontSize: 16, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "${surah.numberOfVerses} Ayat | ${surah.revelation.id}",
+                  "${surah.numberOfVerses} Ayat | ${surah.revelation!.id}",
                   style: const TextStyle(
                     fontSize: 16,
                   ),
@@ -46,27 +46,28 @@ class DetailSurahView extends GetView<DetailSurahController> {
             height: 20,
           ),
           FutureBuilder<detail.DetailSurah>(
-              future: controller.getDetailSurah(surah.number),
+              future: controller.getDetailSurah(surah.number!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 }
 
                 if (!snapshot.hasData) {
+                  logger.d("=== Snapshot => $snapshot");
                   return const Center(child: Text("Tidak ada data"));
                 }
 
-                logger.d("Snapshot => $snapshot");
+                logger.d("=== Snapshot => $snapshot");
 
                 return ListView.builder(
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  itemCount: snapshot.data?.verses.length ?? 0,
+                  itemCount: snapshot.data?.verses!.length ?? 0,
                   itemBuilder: (context, index) {
                     // if (snapshot.data?.verses.isEmpty) {
                     //   return const SizedBox();
                     // }
-                    detail.Verse? ayat = snapshot.data?.verses[index];
+                    detail.Verse? ayat = snapshot.data?.verses![index];
 
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
@@ -99,20 +100,20 @@ class DetailSurahView extends GetView<DetailSurahController> {
                         SizedBox(
                             width: double.infinity,
                             child: Text(
-                              ayat!.text.arab,
+                              ayat!.text!.arab!,
                               style: const TextStyle(fontSize: 30),
                               textAlign: TextAlign.end,
                             )),
                         const SizedBox(height: 10),
                         Text(
-                          ayat.text.transliteration.en,
+                          ayat.text!.transliteration!.en!,
                           style: const TextStyle(
                               fontSize: 18, fontStyle: FontStyle.italic),
                           textAlign: TextAlign.end,
                         ),
                         const SizedBox(height: 25),
                         Text(
-                          ayat.translation.id,
+                          ayat.translation!.id!,
                           style: const TextStyle(fontSize: 18),
                           textAlign: TextAlign.justify,
                         ),

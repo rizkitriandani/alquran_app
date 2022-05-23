@@ -24,7 +24,7 @@ void main() async {
   logger.d(surahAnnaas.toJson());
 
   //COBA MASUK KE NESTED MODEL
-  logger.d(surahAnnaas.name.long);
+  logger.d(surahAnnaas.name!.long);
 
   Uri urlAnnas =
       Uri.parse("https://api.quran.sutanlab.id/surah/${surahAnnaas.number}");
@@ -40,5 +40,5 @@ void main() async {
 
   DetailSurah detailAnnaas = DetailSurah.fromJson(dataAnnaas);
   logger.d("object annas => ${detailAnnaas.toJson()}");
-  logger.d("ayat annas => ${detailAnnaas.verses[0].text.arab}");
+  logger.d("ayat annas => ${detailAnnaas.verses![0].text!.arab}");
 }
