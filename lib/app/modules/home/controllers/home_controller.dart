@@ -1,20 +1,24 @@
+import 'dart:convert';
+
 import 'package:get/get.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../data/models/surah.dart';
+import '../../../utils/logger.dart';
 
 class HomeController extends GetxController {
-  //TODO: Implement HomeController
+  Future<List<Surah>> getAllSurah() async {
+    logger.d("FETCHING data");
+    Uri url = Uri.parse("https://api.quran.sutanlab.id/surah");
+    var result = await http.get(url);
+    List? data = (json.decode(result.body) as Map<String, dynamic>)["data"];
 
-  final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
+    if (data == null || data.isEmpty) {
+      return [];
+    } else {
+      return data.map((e) => Surah.fromJson(e)).toList();
+    }
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
+  
+  
 }
