@@ -11,7 +11,6 @@ class IntroductionView extends GetView<IntroductionController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: accent,
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 40),
@@ -25,7 +24,7 @@ class IntroductionView extends GetView<IntroductionController> {
     
               ),
               Text(
-                'Mengingatkan Waktu Sholat Anda',
+                'Bacalah walaupun satu ayat',
                 style: light.textTheme.subtitle1,
                 // style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
               ),
@@ -33,7 +32,7 @@ class IntroductionView extends GetView<IntroductionController> {
               SizedBox(
                   width: 300,
                   height: 300,
-                  child: Lottie.asset("assets/lottie/muslim_read_quran.json")),
+                  child: Lottie.asset("assets/lottie/man_reads_quran.json")),
               const SizedBox(height: 20),
               SizedBox(
                 width: 300,
