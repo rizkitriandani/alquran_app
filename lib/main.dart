@@ -11,7 +11,7 @@ void main() {
       theme: light,
       debugShowCheckedModeBanner: false,
       title: "Application",
-      initialRoute: Routes.INTRODUCTION,
+      initialRoute: Routes.HOME,
       getPages: AppPages.routes,  
     ),
   );
