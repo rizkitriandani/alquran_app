@@ -6,3 +6,4 @@ const accent = Color(0xffEBF1FF);
 const accentDark = Color(0xff00103F);
 const darkBlue = Color(0xff1B2255);
 const white = Color(0xffFFFFFF);
+const inactiveColor = Color(0xff8789A3);

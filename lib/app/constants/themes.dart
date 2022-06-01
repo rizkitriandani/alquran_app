@@ -17,12 +17,21 @@ ThemeData light = ThemeData(
     visualDensity: VisualDensity.standard,
     canvasColor: accent,
     textTheme: textTheme,
+    tabBarTheme: TabBarTheme(
+      labelColor: primary,
+      unselectedLabelColor: inactiveColor,
+      labelStyle: basedFont.copyWith(fontSize: 16),
+      indicator: const ShapeDecoration(
+        shape: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: primary, width: 3, style: BorderStyle.solid)),
+        // gradient: LinearGradient(colors: [Color(0xff0081ff), Color(0xff01ff80)])
+      ),
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: primary,
-      titleTextStyle: textTheme.headline1!.copyWith(
-        fontSize: 24,color: white
-      ),
-      ));
+      titleTextStyle: textTheme.headline1!.copyWith(fontSize: 20, color: white),
+    ));
 
 ThemeData dark = ThemeData(
     colorScheme: const ColorScheme(
