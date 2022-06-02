@@ -49,9 +49,20 @@ ThemeData dark = ThemeData(
     ),
     visualDensity: VisualDensity.standard,
     canvasColor: accentDark,
-    textTheme: textTheme,
+    textTheme: textThemeDark,
+    tabBarTheme: TabBarTheme(
+      labelColor: primary,
+      unselectedLabelColor: inactiveColor,
+      labelStyle: basedFont.copyWith(fontSize: 16),
+      indicator: const ShapeDecoration(
+        shape: UnderlineInputBorder(
+            borderSide:
+                BorderSide(color: primary, width: 3, style: BorderStyle.solid)),
+        // gradient: LinearGradient(colors: [Color(0xff0081ff), Color(0xff01ff80)])
+      ),
+    ),
     appBarTheme: AppBarTheme(
       backgroundColor: Colors.transparent,
-      elevation: 0.0,
-      titleTextStyle: textTheme.headline1!.copyWith(fontSize: 24),
+      elevation: 0,
+      titleTextStyle: textTheme.headline1!.copyWith(fontSize: 20, color: white),
     ));
