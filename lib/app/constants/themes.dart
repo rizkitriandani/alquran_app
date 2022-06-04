@@ -29,6 +29,7 @@ ThemeData light = ThemeData(
       ),
     ),
     appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(color: white),
       backgroundColor: primary,
       titleTextStyle: textTheme.headline1!.copyWith(fontSize: 20, color: white),
     ));
@@ -62,6 +63,7 @@ ThemeData dark = ThemeData(
       ),
     ),
     appBarTheme: AppBarTheme(
+      iconTheme: IconThemeData(color: white),
       backgroundColor: Colors.transparent,
       elevation: 0,
       titleTextStyle: textTheme.headline1!.copyWith(fontSize: 20, color: white),
