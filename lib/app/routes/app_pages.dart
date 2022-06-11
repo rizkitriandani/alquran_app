@@ -10,6 +10,8 @@ import '../modules/introduction/bindings/introduction_binding.dart';
 import '../modules/introduction/views/introduction_view.dart';
 import '../modules/search/bindings/search_binding.dart';
 import '../modules/search/views/search_view.dart';
+import '../modules/tafsir/bindings/tafsir_binding.dart';
+import '../modules/tafsir/views/tafsir_view.dart';
 
 part 'app_routes.dart';
 
@@ -43,6 +45,11 @@ class AppPages {
       name: _Paths.ABOUT,
       page: () => AboutView(),
       binding: AboutBinding(),
+    ),
+    GetPage(
+      name: _Paths.TAFSIR,
+      page: () => TafsirView(),
+      binding: TafsirBinding(),
     ),
   ];
 }

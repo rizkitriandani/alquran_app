@@ -37,7 +37,7 @@ final TextTheme textTheme = TextTheme(
 );
 final TextTheme textThemeDark = TextTheme(
   headline1: basedFont.copyWith(
-      color: darkBlue,
+      color: white,
       fontSize: 32,
       fontWeight: FontWeight.w700,
       letterSpacing: -1.5),

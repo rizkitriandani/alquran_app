@@ -8,7 +8,7 @@ import 'app/routes/app_pages.dart';
 
 void main() {
   runApp(
-    App(),
+    const App(),
   );
 }
 
@@ -19,10 +19,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   var settingC = Get.put(SettingController(),permanent: true);
+  Get.put(SettingController(),permanent: true);
 
     return GetMaterialApp(
-      // themeMode: settingC.isDark.value ? ThemeMode.light : ThemeMode.light,
       theme: light,
       darkTheme: dark,
       debugShowCheckedModeBanner: false,
