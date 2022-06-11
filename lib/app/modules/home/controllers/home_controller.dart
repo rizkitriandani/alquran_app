@@ -3,13 +3,14 @@ import 'dart:convert';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../constants/constants.dart';
 import '../../../data/models/surah.dart';
 import '../../../utils/logger.dart';
 
 class HomeController extends GetxController {
   Future<List<Surah>> getAllSurah() async {
     logger.d("FETCHING data");
-    Uri url = Uri.parse("https://api.quran.sutanlab.id/surah");
+    Uri url = Uri.parse("$API_HOST/surah/");
     var result = await http.get(url);
     List? data = (json.decode(result.body) as Map<String, dynamic>)["data"];
 
@@ -19,6 +20,4 @@ class HomeController extends GetxController {
       return data.map((e) => Surah.fromJson(e)).toList();
     }
   }
-  
-  
 }

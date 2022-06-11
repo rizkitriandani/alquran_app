@@ -88,20 +88,20 @@ class DetailSurahView extends GetView<DetailSurahController> {
                     logger.d("=== Snapshot => $snapshot");
                     return const Center(child: Text("Tidak ada data"));
                   }
-                  if (snapshot.data == null) {
-                    logger.d("=== Snapshot => $snapshot");
-                    return const Center(child: Text("Tidak ada data"));
-                  }
+                  // if (snapshot.data == null) {
+                  //   logger.d("=== Snapshot => $snapshot");
+                  //   return const Center(child: Text("Tidak ada data"));
+                  // }
 
                   logger.d("=== Snapshot => $snapshot");
-                  logger.d("=== Snapsho.hasDara => ${snapshot.hasData}");
+                  logger.d("=== Snapsho.hasData => ${snapshot.hasData}");
 
                   return ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: snapshot.data?.verses!.length ?? 0,
                     itemBuilder: (context, index) {
-                      detail.Verse? ayat = snapshot.data?.verses![index];
+                      detail.Verse? detailVerse = snapshot.data?.verses![index];
 
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -147,13 +147,13 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                   SizedBox(
                                       width: double.infinity,
                                       child: Text(
-                                        ayat!.text!.arab!,
+                                        detailVerse!.text!.arab!,
                                         style: const TextStyle(fontSize: 30),
                                         textAlign: TextAlign.end,
                                       )),
                                   const SizedBox(height: 10),
                                   Text(
-                                    ayat.text!.transliteration!.en!,
+                                    detailVerse.text!.transliteration!.en!,
                                     style: const TextStyle(
                                         fontSize: 18,
                                         fontStyle: FontStyle.italic),
@@ -161,7 +161,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                                   ),
                                   const SizedBox(height: 25),
                                   Text(
-                                    ayat.translation!.id!,
+                                    detailVerse.translation!.id!,
                                     style: const TextStyle(fontSize: 18),
                                     textAlign: TextAlign.justify,
                                   ),
