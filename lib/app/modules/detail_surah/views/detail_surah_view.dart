@@ -87,82 +87,111 @@ class DetailSurahView extends GetView<DetailSurahController> {
                     logger.d("=== Snapshot => $snapshot");
                     return const Center(child: Text("Tidak ada data"));
                   }
-                  // if (snapshot.data == null) {
-                  //   logger.d("=== Snapshot => $snapshot");
-                  //   return const Center(child: Text("Tidak ada data"));
-                  // }
+         
 
                   logger.d("=== Snapshot => $snapshot");
                   logger.d("=== Snapsho.hasData => ${snapshot.hasData}");
 
-                  return ListView.builder(
+                  return ListView.separated(
                     shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: snapshot.data?.verses!.length ?? 0,
-                    itemBuilder: (context, index) {
+                    physics: const BouncingScrollPhysics(),
+                    itemBuilder: (_, index) {
                       detail.Verse? detailVerse = snapshot.data?.verses![index];
 
-                      return Container(
-                        margin: const EdgeInsets.only(bottom: 10),
-                        width: double.infinity,
+                      return Material(
                         color: Colors.transparent,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              alignment: Alignment.topCenter,
-                              height: 42,
-                              width: 42,
-                              decoration: const BoxDecoration(
-                                  color: Colors.transparent,
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                          'assets/images/decoration.png'),
-                                      fit: BoxFit.cover)),
-                              child: Center(
-                                  child:
-                                      Text("${detailVerse!.number!.inSurah}")),
+                        borderRadius: BorderRadius.circular(20),
+                        child: InkWell(
+                          onTap: () => Get.bottomSheet(
+                            Column(
+                              children: [
+                                const Center(
+                                  child: Text(
+                                    'Bottom Sheet',
+                                    style: TextStyle(fontSize: 18),
+                                  ),
+                                ),
+                                OutlinedButton(
+                                  onPressed: () {
+                                    Get.back();
+                                  },
+                                  child: const Text('Close'),
+                                ),
+                              ],
                             ),
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: Container(
-                                      child: Text(detailVerse.text!.arab!,
-                                          style:
-                                              basedFont.copyWith(fontSize: 20),
-                                          textAlign: TextAlign.end),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: Container(
-                                      child: Text(
-                                        "${detailVerse.text!.transliteration!.en}",
-                                        textAlign: TextAlign.end,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  SizedBox(
-                                    width: double.infinity,
-                                    child: Container(
-                                      child: Text(
-                                        "${detailVerse.translation!.id}",
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            backgroundColor: Colors.white,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          ],
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                          child: Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            width: double.infinity,
+                            color: Colors.transparent,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  alignment: Alignment.topCenter,
+                                  height: 42,
+                                  width: 42,
+                                  decoration: const BoxDecoration(
+                                      color: Colors.transparent,
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/images/decoration.png'),
+                                          fit: BoxFit.cover)),
+                                  child: Center(
+                                      child: Text(
+                                          "${detailVerse!.number!.inSurah}")),
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: Container(
+                                          child: Text(detailVerse.text!.arab!,
+                                              style: basedFont.copyWith(
+                                                  fontSize: 20),
+                                              textAlign: TextAlign.end),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: Container(
+                                          child: Text(
+                                            "${detailVerse.text!.transliteration!.en}",
+                                            textAlign: TextAlign.end,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(height: 20),
+                                      SizedBox(
+                                        width: double.infinity,
+                                        child: Container(
+                                          child: Text(
+                                            "${detailVerse.translation!.id}",
+                                            textAlign: TextAlign.left,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
                       );
                     },
+                    itemCount: snapshot.data!.numberOfVerses!,
+                    separatorBuilder: (BuildContext context, int index) =>
+                        const Divider(color: primary),
                   );
                 }),
           ],
