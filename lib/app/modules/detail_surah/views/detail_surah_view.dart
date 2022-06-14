@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import '../../../constants/constants.dart';
 import '../../../data/models/detail_surah.dart' as detail;
 import '../../../data/models/surah.dart';
-import '../../../routes/app_pages.dart';
 import '../../../utils/logger.dart';
 
 import '../../../widgets/tafsir_surah_dialog.dart';
@@ -103,74 +102,65 @@ class DetailSurahView extends GetView<DetailSurahController> {
                     itemBuilder: (context, index) {
                       detail.Verse? detailVerse = snapshot.data?.verses![index];
 
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            color: primary,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 5, horizontal: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CircleAvatar(
-                                    child: Text("${index + 1}"),
-                                  ),
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(
-                                              Icons.bookmark_add_outlined)),
-                                      IconButton(
-                                          onPressed: () {},
-                                          icon: const Icon(Icons.play_arrow)),
-                                    ],
-                                  )
-                                ],
-                              ),
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 10),
+                        width: double.infinity,
+                        color: Colors.transparent,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              alignment: Alignment.topCenter,
+                              height: 42,
+                              width: 42,
+                              decoration: const BoxDecoration(
+                                  color: Colors.transparent,
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/images/decoration.png'),
+                                      fit: BoxFit.cover)),
+                              child: Center(
+                                  child:
+                                      Text("${detailVerse!.number!.inSurah}")),
                             ),
-                          ),
-                          Material(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(20),
-                            child: InkWell(
-                              onTap: () => Get.toNamed(
-                                Routes.TAFSIR,
-                              ),
-                              borderRadius: BorderRadius.circular(20),
+                            Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   SizedBox(
-                                      width: double.infinity,
-                                      child: Text(
-                                        detailVerse!.text!.arab!,
-                                        style: const TextStyle(fontSize: 30),
-                                        textAlign: TextAlign.end,
-                                      )),
-                                  const SizedBox(height: 10),
-                                  Text(
-                                    detailVerse.text!.transliteration!.en!,
-                                    style: const TextStyle(
-                                        fontSize: 18,
-                                        fontStyle: FontStyle.italic),
-                                    textAlign: TextAlign.end,
+                                    width: double.infinity,
+                                    child: Container(
+                                      child: Text(detailVerse.text!.arab!,
+                                          style:
+                                              basedFont.copyWith(fontSize: 20),
+                                          textAlign: TextAlign.end),
+                                    ),
                                   ),
-                                  const SizedBox(height: 25),
-                                  Text(
-                                    detailVerse.translation!.id!,
-                                    style: const TextStyle(fontSize: 18),
-                                    textAlign: TextAlign.justify,
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: Container(
+                                      child: Text(
+                                        "${detailVerse.text!.transliteration!.en}",
+                                        textAlign: TextAlign.end,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  SizedBox(
+                                    width: double.infinity,
+                                    child: Container(
+                                      child: Text(
+                                        "${detailVerse.translation!.id}",
+                                        textAlign: TextAlign.left,
+                                      ),
+                                    ),
                                   ),
                                 ],
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 20),
-                        ],
+                          ],
+                        ),
                       );
                     },
                   );
