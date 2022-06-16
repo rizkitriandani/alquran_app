@@ -16,45 +16,43 @@ class ListSurah extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: FutureBuilder<List<Surah>>(
-          future: controller.getAllSurah(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
+    return FutureBuilder<List<Surah>>(
+        future: controller.getAllSurah(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-            if (!snapshot.hasData) {
-              return const Center(child: Text("Gagal memuat data"));
-            }
+          if (!snapshot.hasData) {
+            return const Center(child: Text("Gagal memuat data"));
+          }
 
-            logger.d(snapshot);
+          logger.d(snapshot);
 
-            return ListView.builder(
-                itemCount: snapshot.data!.length,
-                itemBuilder: (context, index) {
-                  Surah surah = snapshot.data![index];
-                  return ListTile(
-                    onTap: () {
-                      Get.toNamed(Routes.DETAIL_SURAH, arguments: surah);
-                    },
-                    leading: Container(
-                      height: 42,
-                      width: 42,
-                      decoration: const BoxDecoration(
-                          color: Colors.transparent,
-                          image: DecorationImage(
-                              image: AssetImage('assets/images/decoration.png'),
-                              fit: BoxFit.cover)),
-                      child: Center(child: Text("${surah.number}")),
-                    ),
-                    title: Text(surah.name!.transliteration!.id!),
-                    subtitle: Text(
-                        "${surah.numberOfVerses!} Ayat | ${surah.revelation!.id!}"),
-                    trailing: Text(surah.name!.short!),
-                  );
-                });
-          }),
-    );
+          return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                Surah surah = snapshot.data![index];
+                return ListTile(
+                  onTap: () {
+                    Get.toNamed(Routes.DETAIL_SURAH, arguments: surah);
+                  },
+                  leading: Container(
+                    height: 42,
+                    width: 42,
+                    decoration: const BoxDecoration(
+                        color: Colors.transparent,
+                        image: DecorationImage(
+                            image: AssetImage('assets/images/decoration.png'),
+                            fit: BoxFit.cover)),
+                    child: Center(child: Text("${surah.number}")),
+                  ),
+                  title: Text(surah.name!.transliteration!.id!),
+                  subtitle: Text(
+                      "${surah.numberOfVerses!} Ayat | ${surah.revelation!.id!}"),
+                  trailing: Text(surah.name!.short!),
+                );
+              });
+        });
   }
 }

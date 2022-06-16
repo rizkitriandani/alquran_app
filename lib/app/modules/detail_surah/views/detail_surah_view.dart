@@ -87,7 +87,6 @@ class DetailSurahView extends GetView<DetailSurahController> {
                     logger.d("=== Snapshot => $snapshot");
                     return const Center(child: Text("Tidak ada data"));
                   }
-         
 
                   logger.d("=== Snapshot => $snapshot");
                   logger.d("=== Snapsho.hasData => ${snapshot.hasData}");
@@ -103,26 +102,90 @@ class DetailSurahView extends GetView<DetailSurahController> {
                         borderRadius: BorderRadius.circular(20),
                         child: InkWell(
                           onTap: () => Get.bottomSheet(
-                            Column(
-                              children: [
-                                const Center(
-                                  child: Text(
-                                    'Bottom Sheet',
-                                    style: TextStyle(fontSize: 18),
+                            
+                            SizedBox(
+                              height: 150,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                // crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10, horizontal:100),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.center,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.play_arrow_rounded,
+                                              color: Get.isDarkMode
+                                                  ? white
+                                                  : accentDark),
+                                          // Spacer(),
+                                          SizedBox(width: 20,),
+                                          Text("Putar Murotal",
+                                              style: basedFont.copyWith(
+                                                  fontSize: 16))
+                                        ],
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                OutlinedButton(
-                                  onPressed: () {
-                                    Get.back();
-                                  },
-                                  child: const Text('Close'),
-                                ),
-                              ],
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10,horizontal:100),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.menu_book_rounded,
+                                              color: Get.isDarkMode
+                                                  ? white
+                                                  : accentDark),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text("Lihat Tafsir",
+                                              style: basedFont.copyWith(
+                                                  fontSize: 16))
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10,horizontal:100),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                           MainAxisAlignment.start,
+                                        children: [
+                                          Icon(Icons.bookmark_add_rounded,
+                                              color: Get.isDarkMode
+                                                  ? white
+                                                  : accentDark),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Text("Bookmark",
+                                              style: basedFont.copyWith(
+                                                  fontSize: 16),textAlign: TextAlign.start,)
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                            backgroundColor: Colors.white,
+                            backgroundColor:
+                                Get.isDarkMode ? accentDark : white,
                             elevation: 0,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                           ),
                           borderRadius: BorderRadius.circular(20),
