@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../constants/constants.dart';
 import '../../../data/models/detail_surah.dart' as detail;
 import '../../../data/models/surah.dart';
+import '../../../routes/app_pages.dart';
 import '../../../utils/logger.dart';
 
 import '../../../widgets/tafsir_surah_dialog.dart';
@@ -96,88 +97,54 @@ class DetailSurahView extends GetView<DetailSurahController> {
                     physics: const BouncingScrollPhysics(),
                     itemBuilder: (_, index) {
                       detail.Verse? detailVerse = snapshot.data?.verses![index];
+                      logger.d("WIDTH => ${Get.width}");
 
                       return Material(
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(20),
                         child: InkWell(
                           onTap: () => Get.bottomSheet(
-                            
-                            SizedBox(
-                              height: 150,
+                            Container(
+                              height: 200,
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 30),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 // crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10, horizontal:100),
-                                      child: Row(
-                                        crossAxisAlignment: CrossAxisAlignment.center,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Icon(Icons.play_arrow_rounded,
-                                              color: Get.isDarkMode
-                                                  ? white
-                                                  : accentDark),
-                                          // Spacer(),
-                                          SizedBox(width: 20,),
-                                          Text("Putar Murotal",
-                                              style: basedFont.copyWith(
-                                                  fontSize: 16))
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10,horizontal:100),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Icon(Icons.menu_book_rounded,
-                                              color: Get.isDarkMode
-                                                  ? white
-                                                  : accentDark),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Text("Lihat Tafsir",
-                                              style: basedFont.copyWith(
-                                                  fontSize: 16))
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  InkWell(
-                                    onTap: () {},
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10,horizontal:100),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                           MainAxisAlignment.start,
-                                        children: [
-                                          Icon(Icons.bookmark_add_rounded,
-                                              color: Get.isDarkMode
-                                                  ? white
-                                                  : accentDark),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Text("Bookmark",
-                                              style: basedFont.copyWith(
-                                                  fontSize: 16),textAlign: TextAlign.start,)
-                                        ],
-                                      ),
-                                    ),
-                                  ),
+                                  ListTile(
+                                      onTap: () {},
+                                      leading: Icon(Icons.play_arrow_rounded,
+                                          color: Get.isDarkMode
+                                              ? white
+                                              : accentDark),
+                                      title: Text("Putar Murotal",
+                                          style: basedFont.copyWith(
+                                              fontSize: 14))),
+                                  ListTile(
+                                      onTap: () {
+                                        Get.back();
+                                        Get.toNamed(Routes.TAFSIR);
+                                      },
+                                      leading: Icon(Icons.menu_book_rounded,
+                                          color: Get.isDarkMode
+                                              ? white
+                                              : accentDark),
+                                      title: Text("Lihat Tafsir",
+                                          style: basedFont.copyWith(
+                                              fontSize: 14))),
+                                  ListTile(
+                                      onTap: () {
+                                        Get.snackbar("Bookmark ditambahkan",
+                                            "menambah ayat ini ke dalam bookmark");
+                                      },
+                                      leading: Icon(Icons.bookmark_add_rounded,
+                                          color: Get.isDarkMode
+                                              ? white
+                                              : accentDark),
+                                      title: Text("Bookmark",
+                                          style: basedFont.copyWith(
+                                              fontSize: 14))),
                                 ],
                               ),
                             ),
