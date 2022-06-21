@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../constants/constants.dart';
 import '../../../data/models/surah.dart';
 import '../../../routes/app_pages.dart';
 import '../../../utils/logger.dart';
@@ -29,7 +30,11 @@ class ListSurah extends StatelessWidget {
 
           logger.d(snapshot);
 
-          return ListView.builder(
+          return ListView.separated(
+            shrinkWrap: true,
+            physics: const BouncingScrollPhysics(),
+            separatorBuilder: (BuildContext context, int index) =>
+                  const Divider(color: primary),
               itemCount: snapshot.data!.length,
               itemBuilder: (context, index) {
                 Surah surah = snapshot.data![index];

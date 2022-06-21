@@ -223,6 +223,7 @@ class DetailSurahView extends GetView<DetailSurahController> {
                     separatorBuilder: (BuildContext context, int index) =>
                         const Divider(color: primary),
                   );
+                
                 }),
           ],
         ),

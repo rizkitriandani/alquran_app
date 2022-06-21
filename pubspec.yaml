@@ -24,6 +24,7 @@ dev_dependencies:
 
 flutter: 
   assets: 
+    - assets/juz.txt
     - assets/lottie/
     - assets/fonts/
     - assets/images/

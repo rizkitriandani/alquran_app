@@ -222,7 +222,7 @@ class DetailSurahTafsir {
 class Verse {
   Verse({
     this.number,
-    // this.meta,
+    this.meta,
     this.text,
     this.translation,
     this.audio,
@@ -230,7 +230,7 @@ class Verse {
   });
 
   Number? number;
-  // Meta? meta;
+  Meta? meta;
   Text? text;
   Translation? translation;
   Audio? audio;
@@ -238,7 +238,7 @@ class Verse {
 
   factory Verse.fromJson(Map<String, dynamic>? json) => Verse(
         number: Number.fromJson(json?["number"]),
-        // meta: Meta.fromJson(json?["meta"]),
+        meta: Meta.fromJson(json?["meta"]),
         text: Text.fromJson(json?["text"]),
         translation: Translation.fromJson(json?["translation"]),
         audio: Audio.fromJson(json?["audio"]),
@@ -247,7 +247,7 @@ class Verse {
 
   Map<String, dynamic> toJson() => {
         "number": number?.toJson(),
-        // "meta": meta?.toJson(),
+        "meta": meta?.toJson(),
         "text": text?.toJson(),
         "translation": translation?.toJson(),
         "audio": audio?.toJson(),

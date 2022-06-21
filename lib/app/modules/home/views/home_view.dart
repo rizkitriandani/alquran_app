@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../constants/constants.dart';
+import '../../../data/models/juz.dart' as juz;
 import '../../../routes/app_pages.dart';
 import '../../../utils/logger.dart';
 import '../../../widgets/nav_drawer.dart';
 import '../controllers/home_controller.dart';
+import 'list_juz_view.dart';
 import 'list_surah_view.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -23,7 +25,9 @@ class HomeView extends GetView<HomeController> {
           actions: [
             IconButton(
                 onPressed: () => Get.toNamed(Routes.SEARCH),
-                icon: const Icon(Icons.search,))
+                icon: const Icon(
+                  Icons.search,
+                ))
           ],
         ),
         body: DefaultTabController(
@@ -33,11 +37,11 @@ class HomeView extends GetView<HomeController> {
             children: [
               // Text("Quran Digital",
               //     style: textTheme.headline1!.copyWith(fontSize: 24)),
-    
+
               const SizedBox(
                 height: 30,
               ),
-    
+
               Container(
                 margin: const EdgeInsets.symmetric(horizontal: 25),
                 decoration: const BoxDecoration(
@@ -97,11 +101,11 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               ),
-    
+
               const SizedBox(
                 height: 30,
               ),
-    
+
               const TabBar(tabs: [
                 Tab(
                   text: "Surah",
@@ -113,30 +117,11 @@ class HomeView extends GetView<HomeController> {
                   text: "Bookmark",
                 ),
               ]),
-    
+
               Expanded(
                 child: TabBarView(children: [
                   ListSurah(controller: controller),
-                  ListView.builder(
-                  itemCount: 30,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                      
-                      },
-                      leading: Container(
-                        height: 42,
-                        width: 42,
-                        decoration: const BoxDecoration(
-                            color: Colors.transparent,
-                            image: DecorationImage(
-                                image: AssetImage('assets/images/decoration.png'),
-                                fit: BoxFit.cover)),
-                        child: Center(child: Text("${index+1}")),
-                      ),
-                      title: Text("Juz ${index+1}"),
-                    );
-                  }),
+                  ListJuz(controller: controller,),
                   const Center(child: Text("Bookmark View")),
                 ]),
               ),
@@ -147,3 +132,4 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
+
